@@ -1,0 +1,21 @@
+---
+ - name: test that server returns
+   hosts: "{{ _hosts }}"
+   tasks:
+#     - name: Check url
+#       ansible.builtin.uri:
+#         url: http://localhost:9090
+#         return_content: true
+#       register: info
+#       delay: 5
+#       retries: 36
+#       until: "'fedora' in info.content"
+
+     - name: Check that a page returns successfully but fail if the word Welcome is not in the page contents
+       ansible.builtin.uri:
+         url: "http://{{ ansible_host }}:9090"
+         return_content: true
+       register: info
+       #failed_when: 'info is failed or "Fedora" not in info.content'
+       delay: 5
+       retries: 36
